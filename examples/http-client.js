@@ -100,7 +100,7 @@ async function main() {
       const now = new Date();
       const nextWeek = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
       
-      // Use standard RFC 3339 format with milliseconds (now properly supported)
+      // Strip milliseconds - MCP server validation requires RFC 3339 without fractional seconds
       const timeMin = now.toISOString().split('.')[0] + 'Z';
       const timeMax = nextWeek.toISOString().split('.')[0] + 'Z';
       
