@@ -16,14 +16,14 @@ const rootDir = path.resolve(__dirname, '..');
 const commands = {
   // HTTP Transport
   'http': {
-    description: 'Start HTTP server on localhost:3000',
+    description: 'Start HTTP server on localhost:3010',
     cmd: 'node',
-    args: ['build/index.js', '--transport', 'http', '--port', '3000']
+    args: ['build/index.js', '--transport', 'http', '--port', '3010']
   },
   'http:public': {
     description: 'Start HTTP server accessible from any host',
-    cmd: 'node', 
-    args: ['build/index.js', '--transport', 'http', '--port', '3000', '--host', '0.0.0.0']
+    cmd: 'node',
+    args: ['build/index.js', '--transport', 'http', '--port', '3010', '--host', '0.0.0.0']
   },
 
   // Authentication Management
@@ -185,7 +185,7 @@ async function runCommand(commandName) {
         stdio: 'inherit',
         cwd: rootDir
       });
-      
+
       buildChild.on('exit', (code) => {
         if (code !== 0) {
           reject(new Error(`Build failed with exit code ${code}`));
@@ -193,7 +193,7 @@ async function runCommand(commandName) {
           resolve();
         }
       });
-      
+
       buildChild.on('error', reject);
     }).catch(error => {
       console.error(`\n❌ Build failed: ${error.message}`);
@@ -205,9 +205,9 @@ async function runCommand(commandName) {
   console.log(`🚀 Running: ${commandName}`);
   console.log(`   Command: ${command.cmd} ${command.args.join(' ')}\n`);
 
-  const env = { 
-    ...process.env, 
-    ...(command.env || {}) 
+  const env = {
+    ...process.env,
+    ...(command.env || {})
   };
 
   const child = spawn(command.cmd, command.args, {
